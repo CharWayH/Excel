@@ -8,12 +8,12 @@ from openpyxl.utils import get_column_letter
 import datetime
 wb = Workbook()
 ws1 = wb.active #打开表单
+ws1.merge_cells('B1:E1')#合并B1到E1间的单元格
 ws1['A1']='插入内容'#在A1位置插入内容
 ws1['A2'] = datetime.datetime.now().strftime("%Y-%m-%d")#在A2位置插入时间
 ws1.append([1, 2, 3])#在下一行分别按列顺序插入1,2,3
 ws1.title = '工作表标题1'    #工作表标题
 ws2 = wb.create_sheet(title='工作表标题2') #创建一个新的工作表
-
 #循环插入
 ws3 = wb.create_sheet(title="Data1")
 for row in range(1, 10):    #1-9行
