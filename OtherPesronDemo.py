@@ -5,9 +5,10 @@ import re
 import codecs
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
-wb = Workbook()
-dest_filename = '电影.xlsx'
-ws1 = wb.active
+
+wb = Workbook()                 #创建excel文件
+dest_filename = '电影.xlsx'      #excel文件名
+ws1 = wb.active                 #
 ws1.title = "电影top250"
 
 DOWNLOAD_URL = 'http://movie.douban.com/top250/'
