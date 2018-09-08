@@ -5,8 +5,6 @@ import datetime
 import calendar
 
 
-x
-
 #函数部分
 #数字转周几
 def weekdayName(dayName):
@@ -27,12 +25,17 @@ def weekdayName(dayName):
     return dayName
 
 
-
+'''
 year =datetime.datetime.now().strftime("%Y")
-month = datetime.datetime.now().strftime("%m")
+month = datetime.datetime.now().strftime("%m") 
 days=calendar.monthrange(int(year),int(month))    #该月共几天
+'''
 
-
+print ('请输入年：')
+year = int(input())
+print ('请输入月：')
+month = int(input())
+days=calendar.monthrange(year,month)
 
 wb = Workbook()
 ws=wb.active
@@ -87,9 +90,12 @@ ws['B31']='WM'
 ws['A34']='备注：金浦花园地址南泉路1261弄，靠近兰村路，电梯房,价格米兰房间100元/天，伦敦房间一床70元/天，巴黎房间一床80元/天，纽约房间一床75元/天'
 ws['A35']='      微山三村地址微山路浦明路口，楼梯房6楼，要订房请确认能爬楼梯'
 
+
+
+
 #周几及日期
-for i in range(days[0]-1,days[1]+1):
-    cal = calendar.weekday(int(year),int(month),i) #该月份第一天是周几
+for i in range(1,days[1]+1):
+    cal = calendar.weekday(year,month,i) #该月份第一天是周几
     dayName=weekdayName(cal)
     ws.cell(row=2, column=2+i).value=ws.cell(row=16, column=2+i).value=dayName    #周几
     ws.cell(row=3, column=2+i).value=ws.cell(row=17, column=2+i).value=i      #日期
@@ -103,37 +109,37 @@ ws['B1'].font=Font(color='3883c2',size=16,bold=True)#红色字体
 for i in range(2,32):               #B2-B31字体加粗
         ws['B%s'%i].font=Font(bold=True)
 
-
+bg_column_max = column_max+1    #背景色最后一行
 #背景颜色
 for i in range(4,8):
-    for j in range(3,34):
+    for j in range(3,bg_column_max):
         ws.cell(row=i, column=j).fill = PatternFill(fill_type='solid',fgColor="f2accf")
 
 for i in range(8, 11):
-    for j in range(3, 34):
+    for j in range(3, bg_column_max):
         ws.cell(row=i, column=j).fill = PatternFill(fill_type='solid', fgColor="aff0ee")
 
 for i in range(11, 13):
-    for j in range(3, 34):
+    for j in range(3, bg_column_max):
         ws.cell(row=i, column=j).fill = PatternFill(fill_type='solid', fgColor="e7e4b8")
 
 for i in range(14, 16):
-    for j in range(3, 34):
+    for j in range(3, bg_column_max):
         ws.cell(row=i, column=j).fill = PatternFill(fill_type='solid', fgColor="4682b4")
 
 for i in range(18, 24):
-    for j in range(3, 34):
+    for j in range(3, bg_column_max):
         ws.cell(row=i, column=j).fill = PatternFill(fill_type='solid', fgColor="aff0ee")
 
 for i in range(24,29):
-    for j in range(3, 34):
+    for j in range(3, bg_column_max):
         ws.cell(row=i, column=j).fill = PatternFill(fill_type='solid', fgColor="e7e4b8")
 
 for i in range(29, 31):
-    for j in range(3, 34):
+    for j in range(3, bg_column_max):
         ws.cell(row=i, column=j).fill = PatternFill(fill_type='solid', fgColor="4682b4")
 
-for j in range(3, 34):
+for j in range(3, bg_column_max):
         ws.cell(row=13, column=j).fill = PatternFill(fill_type='solid', fgColor="61ca90")
         ws.cell(row=31, column=j).fill = PatternFill(fill_type='solid', fgColor="61ca90")
 
@@ -189,7 +195,7 @@ ws.cell(row=31,column=column_max).border=Border(left=Side(border_style='thin', c
 
 #调整单元格大小
 ws.column_dimensions['A'].width = 12.0
-ws.column_dimensions['B'].width = 11.5
+ws.column_dimensions['B'].width = 13.67
 
 filename = '住宿%s月份.xlsx'%month
 wb.save(filename=filename)
